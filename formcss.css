@@ -1,11 +1,8 @@
 #form_div {
     text-align: center;
     display: inline-block;
-    color: yellow;
-    background-color: aqua;
 }
 label {
-    background-color: blueviolet;
     width: 100px;
     display: inline-block;
 }

@@ -6,28 +6,95 @@
     <meta charset="utf-8">
 </head>
 <link href="formcss.css" rel="stylesheet"></rel>
+<script src="jquery.js"></script>
+<script src="jqueryvalidator.js"></script>
+
+    
+</script>
+<script>
+ /*   $('document').ready(function() {
+    $('button').click(function(e) {
+        //console.log(e);
+        $("form").submit(function(e){
+            e.preventDefault();
+        })
+        if($('#firstname_id').val().length<1)
+        console.log("err");
+
+        if(!($('#phone_id').val().length>=8 && $('#phone_id').val().length <=10))
+        console.log("invalid phone number " + $('#phone_id').val().length);
+        else
+        console.log($('#phone_id').val());
+    })
+        
+    }) */
+    $('document').ready(function() {
+     $("form").submit(function(e){
+    e.preventDefault();
+    console.log("action prevented");
+    });
+
+    $("form").validate({
+  rules: {
+    firstname: 'required',
+    username : 'required',
+    email : {required : true, email:true},
+    password: { required: true, minlength:5},
+    phonenumber : {required: true, minlength:8, maxlength:10, number:true}
+  },
+  
+  
+  invalidHandler: function(event, validator) {
+      var errors = validator.numberOfInvalids();
+      console.log(errors +" " + "error is a instance of " + errors instanceof String );
+      if (errors) {
+      var message = 'You missed ' + errors + ' fields.';
+      $("div > span").html(message);
+      $("div > span").show();
+    } else {
+      $("div > span").hide();
+    }
+  },
+  errorPlacement: function(error,element) {
+    return true;
+  },
+  
+  submitHandler:function(){
+    $("div > span").hide();
+  }
+  
+});
+
+    });
+</script>
 <body>
+    <div>
+        <span></span>
+    </div>
     <div id="form_div">
+        <form method="POST">
         <div>
             <label for="firstname_id">First Name</label>
-            <input type="text" id="firstname_id" name="firstname" required>
+            <input type="text" id="firstname_id" name="firstname">
            
         </div>
         <div>
             <label for="email_id">Email ID</label>
-            <input type="email" id="email_id" name="email" required>
+            <input type="email" id="email_id" name="email">
         </div>
         <div>
             <label for="user_id">Username</label>
-            <input type="text" id="user_id" name ="username" required>
+            <input type="text" id="user_id" name ="username">
             </div>
         <div>
             <label for="password_id">Password</label>
-            <input type="password" id="password_id" name="password"  required>
+            <input type="password" id="password_id" name="password">
         </div>
         <div>
             <label for="phone_id">Phone Number</label>
-            <input type="tel" id="phone_id" name="phonenumber" pattern="[0-9]{10}" required>
+            <input type="tel" id="phone_id" name="phonenumber">
         </div>
+        <button type="submit" id="signup_id">Sign up</button>
     </div>
+</form>
 </body>
