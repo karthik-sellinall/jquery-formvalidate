@@ -43,8 +43,15 @@
     phonenumber : {required: true, minlength:8, maxlength:10, number:true}
   },
   
+  messages: {
+    firstname: 'Please enter your name',
+    username : 'Choose a username',
+    email : 'enter a valid email ID',
+    password: 'Please enter a strong password',
+    phonenumber : 'enter a valid phone number',
+  },
   
-  invalidHandler: function(event, validator) {
+ /* invalidHandler: function(event, validator) {
       var errors = validator.numberOfInvalids();
       console.log(errors +" " + "error is a instance of " + errors instanceof String );
       if (errors) {
@@ -55,9 +62,10 @@
       $("div > span").hide();
     }
   },
-  errorPlacement: function(error,element) {
-    return true;
-  },
+  */
+    errorElement : 'div',
+    errorLabelContainer: '#errors',
+  
   
   submitHandler:function(){
     $("div > span").hide();
@@ -96,5 +104,6 @@
         </div>
         <button type="submit" id="signup_id">Sign up</button>
     </div>
+    <div id="errors"></div>
 </form>
 </body>
